@@ -12,9 +12,17 @@ class XmlDocument
 	def method_missing(method_name, *args, &block)
 		xml = ""
 		attributes = args[0] || {}
-		attributes == {} ? xml << "<#{method_name}/>" : xml <<  "<#{method_name}" 
-		attributes.each_pair {|key, value| xml << " #{key}='#{value}'/>"}
-		xml
+		xml <<  "<#{method_name}" 
+		attributes.each_pair {|key, value| xml << " #{key}='#{value}'"}
+		
+		if block
+			xml << ">"
+			xml << yield
+			xml << "</#{method_name}>"
+			else
+				xml << "/>"
+			end
+			xml
 	end
 	
 	
