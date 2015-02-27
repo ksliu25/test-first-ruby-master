@@ -31,8 +31,19 @@ class RPNCalculator
 		@calculator.length > 0 ? @calculator << (@calculator.pop * @calculator.pop) : fail("calculator is empty")
 	end
 	
+	def tokens(str)
+		arr = str.split(" ")
+		arr.map! do |str|
+			if str == "*" || str == "+" || str == "-" || str == "/"
+				str = str.to_sym
+				else
+					str.to_i
+				end
+			end
+			arr
+		end
+		
 
-	
 	
   # TODO: your code goes here!
 end
